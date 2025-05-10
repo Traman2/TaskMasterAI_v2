@@ -1,0 +1,12 @@
+{
+  "name": "taskmastersourcecode",
+  "version": "1.0.0",
+  "description": "A web app to help student manage their tasks and classes",
+  "license": "ISC",
+  "author": "Tejas, Srikar, Hamiz, Sreekar, Arpan, Ali, Hasnain",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

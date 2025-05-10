@@ -1,0 +1,11 @@
+Backend
+- Add blackboard integration using a web scraper
+- Find better model to replace Gemini
+- Fix friends implementation and saving logic
+- Add chat feature using socket.io or some other websocket tool for Real Time Chat
+
+Frontend
+- Make mobile app
+- Redesign the web app
+- Maybe create desktop app?
+- Fix all the friends demo code (backend also works on this)

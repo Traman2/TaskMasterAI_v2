@@ -1,0 +1,16 @@
+{
+  "name": "express_services",
+  "version": "1.0.0",
+  "description": "The express server for taskmaster app",
+  "license": "ISC",
+  "author": "Tejas, Srikar, Hamiz, Sreekar, Arpan, Ali, Hasnain",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
