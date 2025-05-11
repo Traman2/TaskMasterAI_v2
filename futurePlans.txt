@@ -9,3 +9,12 @@ Frontend
 - Redesign the web app
 - Maybe create desktop app?
 - Fix all the friends demo code (backend also works on this)
+
+
+npm mods used
+- express
+- mongoose
+- create vite@latest
+- cors
+- dotenv
+- 
