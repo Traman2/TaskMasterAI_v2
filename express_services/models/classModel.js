@@ -10,7 +10,7 @@ const classSchema = new mongoose.Schema({
     contactInfo: String,
     textbooks: [String],
     location: String,
-    user: {type: String, required: true }
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
 
 });
 

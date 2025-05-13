@@ -24,14 +24,12 @@ const userSchema = new mongoose.Schema({
         privateSpace: Number,
     },
 
-    classes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }],
-    calendar: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Calendar' }],
     gpa: Number,
     friendsList: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
     slcSessions: [String]
 });
 
+//Generate token to store in localstorage
 userSchema.methods.generateAuthToken = function () {
     return jwt.sign({ _id: this._id }, "secretstring1234");
 }

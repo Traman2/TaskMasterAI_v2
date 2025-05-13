@@ -1,4 +1,5 @@
 Backend
+- Fix codebase, make it more organized
 - Add blackboard integration using a web scraper
 - Find better model to replace Gemini
 - Fix friends implementation and saving logic
@@ -17,4 +18,5 @@ npm mods used
 - create vite@latest
 - cors
 - dotenv
+- jsonwebtoken
 - 

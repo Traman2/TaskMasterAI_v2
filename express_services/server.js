@@ -1,15 +1,24 @@
-import express from 'express';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import mongoose from "mongoose";
 
+//Route files
+import userRoutes from "./routes/userRoutes.js";
+
+dotenv.config();
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173" }));
+mongoose
+  .connect(process.env.DB_URL)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log("MongoDB Connection failed", err));
 
-//test server
-app.get('/main', (req, res) => {
-    res.send("hello");
-});
+app.use(express.json());
+app.use("/user", userRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`);
-})
+  console.log(`Server is running on PORT ${PORT}`);
+});

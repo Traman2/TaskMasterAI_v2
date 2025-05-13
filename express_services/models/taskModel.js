@@ -16,6 +16,4 @@ const taskSchema = mongoose.Schema({
     class: { type: mongoose.Schema.Types.ObjectId, ref: 'Class'}
 });
 
-// TODO: add api endpoint for getting all incomplete tasks, complete tasks
-
 export default mongoose.model('Task', taskSchema);
