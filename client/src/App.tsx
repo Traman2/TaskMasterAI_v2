@@ -1,7 +1,9 @@
+import LoginPage from "./pages/login"
+
 function App() {
   return (
     <>
-      <p>Hello World</p>
+      <LoginPage/>
     </>
   )
 }
