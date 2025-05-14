@@ -8,6 +8,11 @@ function App() {
         <Routes>
           <Route path="login" element={<LoginPage />} />
           <Route path="dashboard" element={<Dashboard/>} />
+          <Route path="calendar" element={<Dashboard/>} />
+          <Route path="classManager" element={<Dashboard/>} />
+          <Route path="flashCards" element={<Dashboard/>} />
+          <Route path="resources" element={<Dashboard/>} />
+          <Route path="settings" element={<Dashboard/>} />
         </Routes>
       </Router>
     </>

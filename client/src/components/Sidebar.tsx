@@ -1,28 +1,38 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Sidebar() {
-    const navItems = [
+  const navigate = useNavigate();
+
+  const navItems = [
     {
-      icon: '/logos/stash--dashboard-duotone.svg',
-      label: 'Dashboard',
+      icon: "/logos/stash--dashboard-duotone.svg",
+      label: "Dashboard",
+      link: "/dashboard",
     },
     {
-      icon: '/logos/solar--calendar-linear.svg',
-      label: 'Calendar',
+      icon: "/logos/solar--calendar-linear.svg",
+      label: "Calendar",
+      link: "/calendar",
     },
     {
-      icon: '/logos/fluent--class-24-regular.svg',
-      label: 'Class Manager',
+      icon: "/logos/fluent--class-24-regular.svg",
+      label: "Class Manager",
+      link: "/classManager",
     },
     {
-      icon: '/logos/arcticons--flashcards.svg',
-      label: 'FlashCards',
+      icon: "/logos/arcticons--flashcards.svg",
+      label: "FlashCards",
+      link: "/flashCards",
     },
     {
-      icon: '/logos/grommet-icons--resources.svg',
-      label: 'Resources',
+      icon: "/logos/grommet-icons--resources.svg",
+      label: "Resources",
+      link: "/resources",
     },
     {
-      icon: '/logos/mage--settings.svg',
-      label: 'Settings',
+      icon: "/logos/mage--settings.svg",
+      label: "Settings",
+      link: "/settings",
     },
   ];
   return (
@@ -40,10 +50,10 @@ export default function Sidebar() {
         </div>
         <hr className="border-gray-700 mb-5" />
         <nav className="flex-1 space-y-4 mt-5">
-          {navItems.map(({ icon, label }) => (
-            <a
+          {navItems.map(({ icon, label, link }) => (
+            <button
               key={label}
-              href="#"
+              onClick={() => navigate(link)}
               className="flex items-center space-x-3 text-white text-base hover:text-blue-400 transition-colors"
             >
               <img
@@ -52,7 +62,7 @@ export default function Sidebar() {
                 className="w-5 h-5 flex-shrink-0"
               />
               <span>{label}</span>
-            </a>
+            </button>
           ))}
         </nav>
         <button
