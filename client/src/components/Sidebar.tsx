@@ -5,36 +5,40 @@ export default function Sidebar() {
 
   const navItems = [
     {
-      icon: "/logos/stash--dashboard-duotone.svg",
+      icon: "/sidebarLogos/stash--dashboard-duotone.svg",
       label: "Dashboard",
       link: "/dashboard",
     },
     {
-      icon: "/logos/solar--calendar-linear.svg",
+      icon: "/sidebarLogos/solar--calendar-linear.svg",
       label: "Calendar",
       link: "/calendar",
     },
     {
-      icon: "/logos/fluent--class-24-regular.svg",
+      icon: "/sidebarLogos/fluent--class-24-regular.svg",
       label: "Class Manager",
       link: "/classManager",
     },
     {
-      icon: "/logos/arcticons--flashcards.svg",
+      icon: "/sidebarLogos/arcticons--flashcards.svg",
       label: "FlashCards",
       link: "/flashCards",
     },
     {
-      icon: "/logos/grommet-icons--resources.svg",
+      icon: "/sidebarLogos/grommet-icons--resources.svg",
       label: "Resources",
       link: "/resources",
     },
     {
-      icon: "/logos/mage--settings.svg",
+      icon: "/sidebarLogos/mage--settings.svg",
       label: "Settings",
       link: "/settings",
     },
   ];
+
+  const logoutHandler = () => {
+   navigate("/login");
+  }
   return (
     <>
       <aside className="relative w-57 bg-gray-950 rounded-2xl flex flex-col p-6">
@@ -68,6 +72,7 @@ export default function Sidebar() {
         <button
           className="mt-auto w-full py-2 rounded-full text-white font-medium hover:opacity-90 transition-opacity
              bg-[linear-gradient(to_right,#0D0C27_0%,#090979_100%)]"
+             onClick={logoutHandler}
         >
           Logout
         </button>

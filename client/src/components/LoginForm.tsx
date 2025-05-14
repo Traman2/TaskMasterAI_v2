@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useNavigate } from "react-router-dom";
+
 
 //Add zod schema and other stuff
 
@@ -16,6 +18,11 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const navigate = useNavigate();
+
+  const onSubmit = () => {
+    navigate("/dashboard");
+  }
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -47,7 +54,7 @@ export function LoginForm({
                   </div>
                   <Input id="password" type="password" required />
                 </div>
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" onClick={onSubmit}>
                   Login
                 </Button>
               </div>
