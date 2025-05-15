@@ -5,11 +5,12 @@ import mongoose from "mongoose";
 
 //Route files
 import userRoutes from "./routes/userRoutes.js";
-import authRoutes from './routes/authRoutes.js';
-
+import authRoutes from "./routes/authRoutes.js";
+import classRoutes from "./routes/classRoutes.js";
+import taskRoutes from "./routes/taskRoutes.js";
 dotenv.config();
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(cors({ origin: "http://localhost:5173" }));
 mongoose
@@ -20,6 +21,8 @@ mongoose
 app.use(express.json());
 app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/class", classRoutes);
+app.use("/task", taskRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

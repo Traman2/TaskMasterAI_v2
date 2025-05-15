@@ -1,36 +1,30 @@
+import FlashCards from "@/components/FlashCards";
+import Quizzes from "@/components/Quizzes";
 import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
-import Overview from "@/components/Overview";
-import Tasks from "@/components/Tasks";
-import Friends from "@/components/Friends";
 import { useState } from "react";
 
-const tabs = [{ label: "Overview" }, { label: "Tasks" }, { label: "Friends" }]; //Part of mininavbar
+const tabs = [{ label: "Flashcards" }, { label: "Quizzes" }]; //Part of mininavbar
 
-export default function Dashboard() {
-  const [activeTab, setActiveTab] = useState("Overview");
 
-  //Part of mininavbar
+export default function StudyTools() {
+  const [activeTab, setActiveTab] = useState("Flashcards");
   function renderContent() {
-    switch (activeTab) {
-      case "Tasks":
-        return <Tasks />;
-      case "Friends":
-        return <Friends />;
-      default:
-        return (
-          <Overview
-          />
-        );
+      switch (activeTab) {
+        case "Quizzes":
+          return <Quizzes />;
+        default:
+          return (
+            <FlashCards/>
+          );
+      }
     }
-  }
-
   return (
-    <div className="w-full min-h-screen bg-gray-950 flex py-3 pl-3 overflow-hidden">
-      <Sidebar />
-      <main className="flex-1 ml-3 mr-3 bg-zinc-900 rounded-2xl p-6 flex flex-col">
-        <Header />
-        {/* part of mininavbar */}
+    <>
+      <div className="w-full min-h-screen bg-gray-950 flex py-3 pl-3 overflow-hidden">
+        <Sidebar />
+        <main className="flex-1 ml-3 mr-3 bg-zinc-900 rounded-2xl p-6 flex flex-col">
+        <h1 className="text-2xl mb-4 font-bold text-white">Study Tools</h1>
+          {/* part of mininavbar */}
         <nav
           className="
             mb-4 inline-flex space-x-2 rounded-full p-1 w-max
@@ -58,8 +52,10 @@ export default function Dashboard() {
           })}
         </nav>
         {/* put mininavbar as a component later */}
+
         {renderContent()}
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }

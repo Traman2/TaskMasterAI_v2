@@ -1,6 +1,13 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Calendar from "./pages/Calendar";
+import ClassManager from "./pages/ClassManager";
 import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Resources from "./pages/Resources";
+import Settings from "./pages/Settings";
+import StudyTools from "./pages/StudyTools";
+import Chatbot from "./pages/Chatbot";
+
 function App() {
   return (
     <>
@@ -8,11 +15,12 @@ function App() {
         <Routes>
           <Route path="login" element={<LoginPage />} />
           <Route path="dashboard" element={<Dashboard/>} />
-          <Route path="calendar" element={<Dashboard/>} />
-          <Route path="classManager" element={<Dashboard/>} />
-          <Route path="flashCards" element={<Dashboard/>} />
-          <Route path="resources" element={<Dashboard/>} />
-          <Route path="settings" element={<Dashboard/>} />
+          <Route path="calendar" element={<Calendar/>} />
+          <Route path="classManager" element={<ClassManager/>} />
+          <Route path="studytools" element={<StudyTools/>} />
+          <Route path="resources" element={<Resources/>} />
+          <Route path="chatbot" element={<Chatbot/>} />
+          <Route path="settings" element={<Settings/>} />
         </Routes>
       </Router>
     </>

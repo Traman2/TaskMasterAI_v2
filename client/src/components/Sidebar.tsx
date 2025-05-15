@@ -6,7 +6,7 @@ export default function Sidebar() {
   const navItems = [
     {
       icon: "/sidebarLogos/stash--dashboard-duotone.svg",
-      label: "Dashboard",
+      label: "Overview",
       link: "/dashboard",
     },
     {
@@ -21,13 +21,18 @@ export default function Sidebar() {
     },
     {
       icon: "/sidebarLogos/arcticons--flashcards.svg",
-      label: "FlashCards",
-      link: "/flashCards",
+      label: "Study Tools",
+      link: "/studytools",
     },
     {
       icon: "/sidebarLogos/grommet-icons--resources.svg",
       label: "Resources",
       link: "/resources",
+    },
+    {
+      icon: "/sidebarLogos/ph--robot.svg",
+      label: "AI Assistant",
+      link: "/chatbot",
     },
     {
       icon: "/sidebarLogos/mage--settings.svg",
@@ -37,18 +42,18 @@ export default function Sidebar() {
   ];
 
   const logoutHandler = () => {
-   navigate("/login");
-  }
+    navigate("/login");
+  };
   return (
     <>
-      <aside className="relative w-57 bg-gray-950 rounded-2xl flex flex-col p-6">
+      <aside className="relative w-57 bg-zinc-900 rounded-2xl flex flex-col p-6">
         <div className="flex items-center mb-4">
           <img
             src="/LogoMaster.png"
             alt="TaskMasterAI Logo"
             className="h-8 w-auto flex-shrink-0"
           />
-          <span className="ml-3 text-white text-xl font-bold whitespace-nowrap">
+          <span className="font-extrabold text-xl bg-gradient-to-r from-[#B09AFF] to-[#465FFF] bg-clip-text text-transparent whitespace-nowrap">
             TaskMasterAI
           </span>
         </div>
@@ -69,13 +74,32 @@ export default function Sidebar() {
             </button>
           ))}
         </nav>
-        <button
-          className="mt-auto w-full py-2 rounded-full text-white font-medium hover:opacity-90 transition-opacity
-             bg-[linear-gradient(to_right,#0D0C27_0%,#090979_100%)]"
-             onClick={logoutHandler}
-        >
-          Logout
-        </button>
+
+        {/* Instructions stuff and logout button */}
+        <div className="bg-[#2f333b60] mt-10 p-3 rounded-3xl text-white text-center">
+          <span className="font-bold">
+            <img
+              src="/sidebarLogos/fluent-color--warning-16.svg"
+              className="w-5 h-5 flex-shrink-0"
+            />
+            Pre-release
+          </span>{" "}
+          <br /> Please report bugs to{" "}
+          <a
+            target="blank"
+            className="underline text-gray-400"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfDj5b3Q9GMwtrOaHK08BC0WK0OFvV71s5Kyf4HvjH5YbLKyA/viewform?usp=sharing"
+          >
+            Dev Team
+          </a>
+          <button
+            className="mt-5 w-full py-2 rounded-full text-white font-medium hover:opacity-90 transition-opacity
+             bg-[linear-gradient(to_right,#273B7F_0%,#090979_100%)]"
+            onClick={logoutHandler}
+          >
+            Logout
+          </button>
+        </div>
       </aside>
     </>
   );

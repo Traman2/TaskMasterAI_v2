@@ -1,7 +1,13 @@
-type HeaderProps = {
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+interface UserData {
+  _id: string;
+  userName: string;
   firstName: string;
   lastName: string;
-};
+  email: string;
+}
 
 //Get current time
 const currentTime = () => {
@@ -24,14 +30,34 @@ const currentTime = () => {
   return greeting;
 };
 
-export default function Header({ firstName, lastName }: HeaderProps) {
+export default function Header() {
+    const [userData, setUserData] = useState<UserData | null>(null);
+  
+//Pull user details
+  useEffect(() => {
+    const fetchUserData = () => {
+      axios
+        .get("http://localhost:4000/user/email/tejassraman@gmail.com")
+        .then((userRes) => {
+          setUserData(userRes.data);
+          console.log("success, change to not use hardcoded email");
+        })
+        .catch((err) => {
+          console.error("Error connection to server 4000", err);
+        });
+    };
+    fetchUserData();
+  }, []);
+
+
+
   return (
     <header className="mb-6 flex flex-col space-y-4">
       {/* Greeting */}
       <div>
         <p className="text-sm text-white/70">{currentTime()}</p>
         <h1 className="text-2xl font-bold text-white">
-          {firstName} {lastName}
+          {userData && userData.firstName} {userData && userData.lastName}
         </h1>
       </div>
     </header>
