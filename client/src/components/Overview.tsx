@@ -183,10 +183,12 @@ export default function Overview() {
         {/* Large card second row tasks*/}
         <div
           className="
-              col-span-2 row-span-2 rounded-2xl
+              col-span-2 row-span-2 rounded-2xl px-5 py-5
               bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)]
             "
-        ></div>
+        >
+        <h1 className="text-white font-bold">Activity</h1>
+        </div>
 
         {/* small card friends */}
         <div
@@ -197,7 +199,7 @@ export default function Overview() {
             flex flex-col
           "
         >
-          <h1 className="text-white font-bold text-lg mb-3">Tasks</h1>
+          <h1 className="text-white font-bold text-lg mb-3">Status</h1>
           <div
             className="
               flex
@@ -215,6 +217,7 @@ export default function Overview() {
                 options={options}
                 width={180}
                 height={170}
+                className="p-2"
               />
             </div>
 
