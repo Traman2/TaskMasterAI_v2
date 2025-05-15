@@ -1,14 +1,124 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+interface TaskData {
+  _id: string;
+  deadline: string;
+  topic: string;
+  title: string;
+  status: "pending" | "completed" | "overdue";
+  points: number | null;
+  textbook: string | null;
+  class: string; // classId
+  className?: string; // Added by fetching logic
+  classLocation?: string; // Added by fetching logic
+}
+
+interface ClassData {
+  _id: string;
+  name: string;
+  timing: string;
+  location: string;
+}
+
 export default function Tasks() {
+  const [tasks, setTasks] = useState<TaskData[]>([]);
+  const [classes, setClasses] = useState<ClassData[]>([]);
+
+  //Pull class details
+  useEffect(() => {
+    const fetchClassData = () => {
+      axios
+        .get<ClassData[]>(
+          "http://localhost:4000/class/user/6823b140e1877e1c6d56ce8d"
+        )
+        .then((classRes) => {
+          setClasses(classRes.data);
+          console.log("success, change to not use hardcoded email");
+        })
+        .catch((err) => {
+          console.error("Error connection to server 4000", err);
+        });
+    };
+    fetchClassData();
+  }, []);
+
+  // Pull task details
+  useEffect(() => {
+    const fetchTaskData = () => {
+      const requests = classes.map((cls) =>
+        axios
+          .get<TaskData[]>(`http://localhost:4000/task/classid/${cls._id}`)
+          .then((res) => res.data)
+      );
+
+      Promise.all(requests)
+        .then((resultsArrays) => {
+          const allTasks = resultsArrays.flat();
+          setTasks(allTasks);
+          console.log("fetched & set all tasks for graphs");
+        })
+        .catch((err) => {
+          console.error("Error connecting to server 4000", err);
+        });
+    };
+
+    fetchTaskData();
+  }, [classes]);
+
   return (
     <>
       <div
-        className="flex justify-center items-center flex-1
-              col-span-1 row-span-9 rounded-2xl
+        className="px-4 py-4
+              col-span-1 row-span-9 rounded-2xl flex flex-col h-146
               bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)]
             "
       >
-        {/* Implement task cards later */}
-        <p className="text-white text-2xl font-bold border-2 border-dashed p-3 rounded-2xl">Tasks feature coming soon</p>
+        <h2 className="text-white mb-3 font-bold">My Tasks</h2>
+        <div className="pr-3 flex-1 grid grid-cols-3 gap-2 gap-x-2 overflow-y-auto scrollbar-cool rounded-2xl">
+          {" "}
+          {tasks.map((data) => {
+            const date = new Date(data.deadline);
+            const formattedDate = date.toLocaleString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+            });
+
+            const finalName =
+              data.title.length <= 24
+                ? data.title
+                : `${data.title.slice(0, 24)}...`;
+
+                let status : string = "";
+              if(data.status === "completed") status = "Completed";
+              if(data.status === "overdue") status = "Overdue";
+              if(data.status === "pending") status = "Pending";
+            return (
+              <div
+                key={data._id}
+                className="border-blue-700 border-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] mt-3 px-4 py-2 rounded-md"
+              >
+                <p className="text-blue-300">
+                  <span className="font-bold">Title:</span> {finalName}
+                </p>
+                <p className="text-blue-300">
+                  <span className="font-bold">Due Date:</span> {formattedDate}
+                </p>
+                <p className="text-blue-300">
+                  <span className="font-bold">Status:</span> {status}
+                </p>
+                <p className="text-blue-300">
+                  <span className="font-bold">Points:</span>{" "}
+                  {data && data.points}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );

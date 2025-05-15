@@ -2,11 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface UserData {
-  _id: string;
-  userName: string;
   firstName: string;
   lastName: string;
-  email: string;
 }
 
 //Get current time

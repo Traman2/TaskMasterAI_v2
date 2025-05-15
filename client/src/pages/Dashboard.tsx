@@ -14,14 +14,11 @@ export default function Dashboard() {
   function renderContent() {
     switch (activeTab) {
       case "Tasks":
-        return <Tasks />;
+        return <Tasks />
       case "Friends":
-        return <Friends />;
+        return <Friends />
       default:
-        return (
-          <Overview
-          />
-        );
+        return <Overview/>
     }
   }
 

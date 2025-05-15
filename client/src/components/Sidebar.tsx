@@ -76,15 +76,17 @@ export default function Sidebar() {
         </nav>
 
         {/* Instructions stuff and logout button */}
-        <div className="bg-[#2f333b60] mt-10 p-3 rounded-3xl text-white text-center">
-          <span className="font-bold">
-            <img
-              src="/sidebarLogos/fluent-color--warning-16.svg"
-              className="w-5 h-5 flex-shrink-0"
-            />
-            Pre-release
-          </span>{" "}
-          <br /> Please report bugs to{" "}
+        <div className="bg-[#2f333b60] p-3 rounded-3xl text-white text-center">
+          
+          <div className="flex items-center ml-4 space-x-2 mb-4">
+              <img
+                src="/sidebarLogos/fluent-color--warning-16.svg"
+                className="w-5 h-5 flex-shrink-0"
+              />
+              <span className="font-bold">Pre-release</span>
+          </div>
+
+          Please report bugs to {" "}
           <a
             target="blank"
             className="underline text-gray-400"

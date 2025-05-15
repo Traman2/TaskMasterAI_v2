@@ -118,3 +118,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* custom “.scrollbar-cool” utility */
+  .scrollbar-cool::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-cool::-webkit-scrollbar-track {
+    background: theme('colors.gray.700');
+    border-radius: 4px;
+  }
+  .scrollbar-cool::-webkit-scrollbar-thumb {
+    background-color: theme('colors.blue.500');
+    border-radius: 4px;
+    border: 2px solid theme('colors.gray.700');
+  }
+  /* Firefox */
+  .scrollbar-cool {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.blue.500') theme('colors.gray.700');
+  }
+}
+
