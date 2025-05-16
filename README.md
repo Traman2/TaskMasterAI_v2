@@ -29,18 +29,18 @@ TaskMasterAI is a social platform designed for students to connect with peers wh
     ```
 2. Install dependencies for backend and frontend:
     ```bash
-    cd server
+    cd express_services
     npm install
     cd ../client
     npm install
     ```
-3. Set up environment variables as needed.
+3. Set up .env. Need Gemini LLM API key, and Mongodb URI for database
 
 ### Running the App
 
 - Start the backend:
   ```bash
-  cd server
+  cd express_services
   npm start
   ```
 - Start the frontend:
