@@ -9,9 +9,7 @@ interface TaskData {
   status: "pending" | "completed" | "overdue";
   points: number | null;
   textbook: string | null;
-  class: string; // classId
-  className?: string; // Added by fetching logic
-  classLocation?: string; // Added by fetching logic
+  class: string; // class _id
 }
 
 interface ClassData {

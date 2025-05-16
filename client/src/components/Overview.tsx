@@ -235,7 +235,7 @@ export default function Overview() {
                     {" "} {finalName}
                   </p>
                   <p className="text-blue-300">
-                    <span className="font-bold">DueDate:</span>
+                    <span className="font-bold">Due Date:</span>
                     {" "} {formattedDate}
                   </p>
                   <p className="text-blue-300">

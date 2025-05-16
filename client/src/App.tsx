@@ -14,6 +14,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="" element={<LoginPage />} />
+          <Route path="login" element={<LoginPage />} />
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="calendar" element={<Calendar/>} />
           <Route path="classManager" element={<ClassManager/>} />
