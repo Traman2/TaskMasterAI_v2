@@ -46,7 +46,7 @@ export default function Sidebar() {
   };
   return (
     <>
-      <aside className="relative w-57 bg-zinc-900 rounded-2xl flex flex-col p-6">
+      <aside className="relative w-57 bg-[#060B3B] rounded-2xl flex flex-col p-6">
         <div className="flex items-center mb-4">
           <img
             src="/LogoMaster.png"
