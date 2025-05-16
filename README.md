@@ -1,4 +1,4 @@
-# TaskMasterAI
+# TaskMasterAI v2
 
 TaskMasterAI is a social platform designed for students to connect with peers who share similar classes and tasks. Collaborate, organize study groups, and manage your academic workload together!
 
