@@ -6,8 +6,10 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 
 /*
- * TODO
- * Replace activity task list with graph
+ * TODO during summer for Dashboard Overview: 
+ * - Replace activity task list with graph
+ * - Fix color scheme
+ * - Add Oauth and get rid of hardcoded email
  */
 
 
