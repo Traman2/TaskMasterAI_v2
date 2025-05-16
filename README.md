@@ -51,3 +51,5 @@ TaskMasterAI is a social platform designed for students to connect with peers wh
 
 ---
 *Connect. Collaborate. Conquer your tasks with TaskMasterAI!*
+
+Authors: Ali, Srikar, Sryiuth, Hamiz, Tejas, Arpan and Hasnain
