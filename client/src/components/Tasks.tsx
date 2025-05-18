@@ -1,6 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+//Interfaces
+interface UserData {
+  _id: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+
 interface TaskData {
   _id: string;
   deadline: string;
@@ -23,22 +33,26 @@ export default function Tasks() {
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [classes, setClasses] = useState<ClassData[]>([]);
 
-  //Pull class details
+  //Pull class details from user details
   useEffect(() => {
-    const fetchClassData = () => {
+    const fetchUserData = () => {
       axios
-        .get<ClassData[]>(
-          "http://localhost:4000/class/user/6823b140e1877e1c6d56ce8d"
-        )
+        .get<UserData>("http://localhost:4000/user/email/tejassraman@gmail.com")
+        .then((userRes) => {
+          console.log("success, change to not use hardcoded email");
+          return axios.get<ClassData[]>(
+            `http://localhost:4000/class/user/${userRes.data._id}`
+          );
+        })
         .then((classRes) => {
           setClasses(classRes.data);
           console.log("success, change to not use hardcoded email");
         })
         .catch((err) => {
-          console.error("Error connection to server 4000", err);
+          console.error("Error with user details", err);
         });
     };
-    fetchClassData();
+    fetchUserData();
   }, []);
 
   // Pull task details
@@ -46,7 +60,7 @@ export default function Tasks() {
     const fetchTaskData = () => {
       const requests = classes.map((cls) =>
         axios
-          .get<TaskData[]>(`http://localhost:4000/task/classid/${cls._id}`)
+          .get<TaskData[]>(`http://localhost:4000/task/classid/${cls?._id}`)
           .then((res) => res.data)
       );
 
@@ -57,7 +71,7 @@ export default function Tasks() {
           console.log("fetched & set all tasks for graphs");
         })
         .catch((err) => {
-          console.error("Error connecting to server 4000", err);
+          console.error("Error with task details", err);
         });
     };
 

@@ -96,7 +96,7 @@ export default function Sidebar() {
           </a>
           <button
             className="mt-5 w-full py-2 rounded-full text-white font-medium hover:opacity-90 transition-opacity
-             bg-[linear-gradient(to_right,#273B7F_0%,#090979_100%)]"
+             bg-[linear-gradient(to_right,#273B7F_0%,#090979_100%)] hover:cursor-pointer" 
             onClick={logoutHandler}
           >
             Logout

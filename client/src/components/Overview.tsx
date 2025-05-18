@@ -47,39 +47,29 @@ export default function Overview() {
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [classes, setClasses] = useState<ClassData[]>([]);
 
-  //Pull user details
+  //Pull class details from user details
   useEffect(() => {
     const fetchUserData = () => {
       axios
         .get<UserData>("http://localhost:4000/user/email/tejassraman@gmail.com")
         .then((userRes) => {
-          setUserData(userRes.data);
           console.log("success, change to not use hardcoded email");
+          setUserData(userRes.data);
+          return axios.get<ClassData[]>(
+            `http://localhost:4000/class/user/${userRes.data._id}`
+          );
         })
-        .catch((err) => {
-          console.error("Error connection to server 4000", err);
-        });
-    };
-    fetchUserData();
-  }, []);
-
-  //Pull class details
-  useEffect(() => {
-    const fetchClassData = () => {
-      axios
-        .get<ClassData[]>(
-          "http://localhost:4000/class/user/6823b140e1877e1c6d56ce8d"
-        )
         .then((classRes) => {
           setClasses(classRes.data);
           console.log("success, change to not use hardcoded email");
         })
         .catch((err) => {
-          console.error("Error connection to server 4000", err);
+          console.error("Error with user details", err);
         });
     };
-    fetchClassData();
+    fetchUserData();
   }, []);
+
 
   // Pull task details
   useEffect(() => {
@@ -171,7 +161,7 @@ export default function Overview() {
         >
           <h1 className="text-white font-bold">Upcoming Classes</h1>
           <div className="flex flex-wrap gap-3">
-            {classes.map((data) => {
+            {classes.slice(0,2).map((data) => {
               const finalName =
                 data.name.length <= 24
                   ? data.name

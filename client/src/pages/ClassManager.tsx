@@ -23,7 +23,7 @@ interface ClassData {
 export default function ClassManager() {
   const [classes, setClasses] = useState<ClassData[]>([]);
 
-  //Pull user details
+  //Pull class details from user details
   useEffect(() => {
     const fetchUserData = () => {
       axios
@@ -47,7 +47,7 @@ export default function ClassManager() {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-zinc-900 flex py-3 pl-3 overflow-hidden">
+      <div className="w-full min-h-screen bg-zinc-900 flex py-3 pl-3">
         <Sidebar />
         <main className="flex-1 ml-3 mr-3 bg-[#060B3B] rounded-2xl p-6 flex flex-col">
           <h1 className="text-2xl mb-4 font-bold text-white">Class Manager</h1>
@@ -70,7 +70,7 @@ export default function ClassManager() {
             </div>
 
             {/* Classes grid */}
-            <div className="w-full flex-1 grid grid-cols-3 gap-4 overflow-y-auto scrollbar-cool">
+            <div className="w-full flex-1 grid grid-cols-3 gap-4 max-h-97 pr-4 overflow-y-auto scrollbar-cool">
               {classes.map((data) => (
                 <div
                   key={data._id}
