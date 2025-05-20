@@ -35,11 +35,6 @@ export default function ClassManager() {
   const [classes, setClasses] = useState<ClassData[]>([]);
   const [uploading, setUploading] = useState(false); //For upload button
   const [userInfo, setUserInfo] = useState<UserData | null>(null);
-  const [toast, setToast] = useState({
-    message: "",
-    type: "success" as "success" | "error",
-    show: false,
-  });
 
   //Form variables from zod
   const {
@@ -80,7 +75,6 @@ export default function ClassManager() {
 
   const syllabusHandler = async (data: FormData) => {
     setUploading(true);
-    setToast({ message: "", type: "success", show: false });
     const file = data.file[0];
     const formData = new FormData();
     formData.append("file", file);
@@ -97,24 +91,10 @@ export default function ClassManager() {
         }
       )
       .then(() => {
-        setToast({
-          message: "File uploaded successfully. Please wait up to 2 minutes",
-          type: "success",
-          show: true,
-        });
         reset();
       })
       .catch((error) => {
         console.error("Upload error: ", error);
-        const message =
-          error.response?.data?.message ||
-          error.message ||
-          "File upload failed. Please try again.";
-        setToast({
-          message: message,
-          type: "error",
-          show: true,
-        });
       })
       .finally(() => {
         setUploading(false);
