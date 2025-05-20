@@ -4,9 +4,9 @@ export default function Chatbot() {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-zinc-900 flex py-3 pl-3 overflow-hidden">
+      <div className="w-full min-h-screen bg-[#040726] flex py-3 pl-3 overflow-hidden">
         <Sidebar />
-        <main className="flex-1 ml-3 mr-3 bg-[#060B3B] rounded-2xl p-6 flex flex-col">
+        <main className="flex-1 ml-3 mr-3 bg-[#0B103E] rounded-2xl p-6 flex flex-col">
           <h1 className="text-2xl mb-4 font-bold text-white">AI Assistant</h1>
           <div className="grid grid-cols-12 grid-rows-10 gap-3 flex-1">
             {/* Chat Sidebar, click on class to ask questions */}

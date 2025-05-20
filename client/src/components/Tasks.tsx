@@ -114,16 +114,16 @@ export default function Tasks() {
                 key={data._id}
                 className="border-blue-700 border-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] mt-3 px-4 py-2 rounded-md"
               >
-                <p className="text-blue-300">
+                <p className="text-blue-200">
                   <span className="font-bold">Title:</span> {finalName}
                 </p>
-                <p className="text-blue-300">
+                <p className="text-blue-200">
                   <span className="font-bold">Due Date:</span> {formattedDate}
                 </p>
-                <p className="text-blue-300">
+                <p className="text-blue-200">
                   <span className="font-bold">Status:</span> {status}
                 </p>
-                <p className="text-blue-300">
+                <p className="text-blue-200">
                   <span className="font-bold">Points:</span>{" "}
                   {data && data.points}
                 </p>

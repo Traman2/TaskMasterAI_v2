@@ -47,9 +47,9 @@ export default function ClassManager() {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-zinc-900 flex py-3 pl-3">
+      <div className="w-full min-h-screen bg-[#040726] flex py-3 pl-3">
         <Sidebar />
-        <main className="flex-1 ml-3 mr-3 bg-[#060B3B] rounded-2xl p-6 flex flex-col">
+        <main className="flex-1 ml-3 mr-3 bg-[#0B103E] rounded-2xl p-6 flex flex-col">
           <h1 className="text-2xl mb-4 font-bold text-white">Class Manager</h1>
           <div
             className="flex flex-col items-center justify-start space-y-6 flex-1 rounded-2xl bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)] p-6 overflow-hidden">
@@ -76,16 +76,16 @@ export default function ClassManager() {
                   key={data._id}
                   className="border-2 border-blue-700 rounded-md bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] p-4"
                 >
-                  <p className="text-blue-300">
+                  <p className="text-blue-200">
                     <span className="font-bold">Title:</span> {data.name}
                   </p>
-                  <p className="text-blue-300">
+                  <p className="text-blue-200">
                     <span className="font-bold">Timing:</span> {data.timing}
                   </p>
-                  <p className="text-blue-300">
+                  <p className="text-blue-200">
                     <span className="font-bold">Location:</span> {data.location}
                   </p>
-                  <div className="text-blue-300">
+                  <div className="text-blue-200">
                     <span className="font-bold">Grading Policy:</span>
                     <p className="mt-2 border-2 border-blue-700 rounded-md bg-[#1C2032]/50 p-2">
                       {data.gradingPolicy}

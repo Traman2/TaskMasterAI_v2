@@ -46,14 +46,14 @@ export default function Sidebar() {
   };
   return (
     <>
-      <aside className="relative w-57 bg-[#060B3B] rounded-2xl flex flex-col p-6">
+      <aside className="relative w-57 bg-[#0B103E] rounded-2xl flex flex-col p-6">
         <div className="flex items-center mb-4">
           <img
             src="/LogoMaster.png"
             alt="TaskMasterAI Logo"
             className="h-8 w-auto flex-shrink-0"
           />
-          <span className="font-extrabold text-xl bg-gradient-to-r from-[#B09AFF] to-[#465FFF] bg-clip-text text-transparent whitespace-nowrap">
+          <span className="font-extrabold text-xl hover:cursor-pointer bg-gradient-to-r from-[#B09AFF] to-[#465FFF] bg-clip-text text-transparent whitespace-nowrap">
             TaskMasterAI
           </span>
         </div>
@@ -63,7 +63,7 @@ export default function Sidebar() {
             <button
               key={label}
               onClick={() => navigate(link)}
-              className="flex items-center space-x-3 text-white text-base hover:text-blue-400 transition-colors"
+              className="flex items-center space-x-3 text-white text-base hover:text-blue-400 transition-colors hover:cursor-pointer"
             >
               <img
                 src={icon}
@@ -86,7 +86,7 @@ export default function Sidebar() {
               <span className="font-bold">Pre-release</span>
           </div>
 
-          Please report bugs to {" "}
+          Please report bugs or provide feedback to {" "}
           <a
             target="blank"
             className="underline text-gray-400"

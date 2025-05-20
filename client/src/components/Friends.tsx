@@ -8,7 +8,6 @@ export default function Friends() {
               bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)]
             "
         ></div>
-
         <div
           className="
               col-span-9 row-span-1 rounded-2xl justify-center items-center flex flex-1
