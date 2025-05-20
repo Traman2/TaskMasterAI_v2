@@ -10,15 +10,16 @@ export default function Sidebar() {
       link: "/dashboard",
     },
     {
-      icon: "/sidebarLogos/solar--calendar-linear.svg",
-      label: "Calendar",
-      link: "/calendar",
-    },
-    {
       icon: "/sidebarLogos/fluent--class-24-regular.svg",
       label: "Class Manager",
       link: "/classManager",
     },
+    {
+      icon: "/sidebarLogos/solar--calendar-linear.svg",
+      label: "Calendar",
+      link: "/calendar",
+    },
+    
     {
       icon: "/sidebarLogos/arcticons--flashcards.svg",
       label: "Study Tools",
