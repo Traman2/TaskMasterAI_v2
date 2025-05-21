@@ -23,6 +23,7 @@ interface ClassData {
   gradingPolicy: string;
 }
 
+//Form handlers
 const fileSchema = z.object({
   file: z.instanceof(FileList).refine((files) => files.length > 0, {
     message: "File is required",
@@ -108,6 +109,7 @@ export default function ClassManager() {
         <main className="flex-1 ml-3 mr-3 bg-[#0B103E] rounded-2xl p-6 flex flex-col">
           <h1 className="text-2xl mb-4 font-bold text-white">Class Manager</h1>
           <div className="flex flex-col items-center justify-start space-y-6 flex-1 rounded-2xl bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)] p-6 overflow-hidden">
+            {/* Form submit box */}
             <form onSubmit={handleSubmit(syllabusHandler)} className="w-full">
               <label className="relative w-full h-52 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center p-7">
                 <img
@@ -118,7 +120,7 @@ export default function ClassManager() {
                 <h2 className="text-white text-2xl font-bold text-center">
                   Drop your PDF here
                   <br />
-                  <span className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-400">
                     {fileName ? (
                       <p className="mt-3">
                         <strong>Selected File:</strong> {fileName}
@@ -128,13 +130,13 @@ export default function ClassManager() {
                         Drag and drop or browse to upload. Max file size: 10MB
                       </p>
                     )}
-                  </span>
+                  </p>
                 </h2>
                 {errors.file && (
                 <p className="text-destructive text-sm mt-1">
                   {errors.file.message}
                 </p>
-              )}
+                )}
                 <input
                   id="file"
                   type="file"

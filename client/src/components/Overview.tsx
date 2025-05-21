@@ -171,7 +171,8 @@ export default function Overview() {
           </div>
 
           <h1 className="text-white font-bold mt-5">Alerts</h1>
-          <div className="bg-[#31258B] mt-2 rounded-2xl p-2 border border-blue-800">            <div
+          <div className="bg-[#31258B] mt-2 rounded-2xl p-2 border border-blue-800">            
+            <div
               className=" mt-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)]
               border border-blue-700 rounded-2xl p-3"
             >

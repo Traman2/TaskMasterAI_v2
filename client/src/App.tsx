@@ -7,6 +7,7 @@ import Resources from "./pages/Resources";
 import Settings from "./pages/Settings";
 import StudyTools from "./pages/StudyTools";
 import Chatbot from "./pages/Chatbot";
+import Leaderboard from "./pages/Leaderbaord";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="resources" element={<Resources/>} />
           <Route path="chatbot" element={<Chatbot/>} />
           <Route path="settings" element={<Settings/>} />
+          <Route path="leaderboard" element={<Leaderboard/>}/>
         </Routes>
       </Router>
     </>

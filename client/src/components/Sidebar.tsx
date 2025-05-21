@@ -36,6 +36,11 @@ export default function Sidebar() {
       link: "/chatbot",
     },
     {
+      icon: "",
+      label: "Leaderboard",
+      link: "/leaderboard"
+    },
+    {
       icon: "/sidebarLogos/mage--settings.svg",
       label: "Settings",
       link: "/settings",
