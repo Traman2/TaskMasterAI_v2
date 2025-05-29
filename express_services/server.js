@@ -15,7 +15,7 @@ import flashCardRoutes from "./routes/flashCardRoutes.js";
 
 dotenv.config();
 const app = express();
-const PORT = 4000;
+const PORT = 3000;
 
 app.use(cors({ origin: "http://localhost:5173" }));
 mongoose
@@ -68,12 +68,7 @@ async function getChatHistory(userId, friendId) {
   })
 
   if (!chat) {
-    const newChat = new messageModel({
-      participants: [userId, friendId],
-      messages: []
-    });
-    await newChat.save();
-    chat = newChat.toObject();
+    return [];
   }
 
   return (chat.messages || [])
@@ -127,10 +122,6 @@ app.use("/class", classRoutes);
 app.use("/task", taskRoutes);
 app.use("/resources", resourceRoutes);
 app.use("/flashcard", flashCardRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}`);
-});
 
 http.listen(3000, () => {
   console.log("RTT server running at http://localhost:3000");

@@ -35,14 +35,14 @@ export default function Header() {
   useEffect(() => {
     const fetchUserData = () => {
       axios
-        .get("http://localhost:4000/user/me",
+        .get("http://localhost:3000/user/me",
         { headers: { "x-auth-token": token } })
         .then((userRes) => {
           setUserData(userRes.data);
           console.log("success, change to not use hardcoded email");
         })
         .catch((err) => {
-          console.error("Error connection to server 4000", err);
+          console.error("Error connection to server 3000", err);
         });
     };
     fetchUserData();

@@ -33,11 +33,11 @@ export default function Resources() {
   // load first class
   useEffect(() => {
     axios
-      .get<UserData>("http://localhost:4000/user/me",
+      .get<UserData>("http://localhost:3000/user/me",
         { headers: { "x-auth-token": token } })
       .then(({ data: user }) => {
         return axios.get<ClassData[]>(
-          `http://localhost:4000/class/user/${user._id}`
+          `http://localhost:3000/class/user/${user._id}`
         );
       })
       .then(({ data: cls }) => {
@@ -51,7 +51,7 @@ export default function Resources() {
   // fetch resource
   const fetchResource = (classId: string) => {
     axios
-      .get<ResourceData[]>(`http://localhost:4000/resources/class/${classId}`)
+      .get<ResourceData[]>(`http://localhost:3000/resources/class/${classId}`)
       .then(({ data: resources }) => {
         setActiveResource(resources.length ? resources[0] : null);
         const matchedClass = classes.find((c) => c._id === classId);

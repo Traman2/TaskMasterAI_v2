@@ -42,14 +42,14 @@ export default function DropBoxClass() {
   useEffect(() => {
     const fetchUserData = () => {
       axios
-        .get<UserData>("http://localhost:4000/user/me",
+        .get<UserData>("http://localhost:3000/user/me",
         { headers: { "x-auth-token": token } })
         .then((userRes) => {
           console.log("success, change to not use hardcoded email");
           setUserInfo(userRes.data);
         })
         .catch((err) => {
-          console.error("Error connection to server 4000", err);
+          console.error("Error connection to server 3000", err);
         });
     };
     fetchUserData();
@@ -67,7 +67,7 @@ export default function DropBoxClass() {
     const userId = userInfo?._id;
     axios
       .post(
-        `http://localhost:4000/user/aisyllabus/${userId}/api/upload`,
+        `http://localhost:3000/user/aisyllabus/${userId}/api/upload`,
         formData,
         {
           headers: {

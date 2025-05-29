@@ -43,7 +43,7 @@ export default function Friends() {
 
   useEffect(() => {
     axios
-      .get<UserData>("http://localhost:4000/user/me", {
+      .get<UserData>("http://localhost:3000/user/me", {
         headers: { "x-auth-token": token },
       })
       .then((userRes) => {
@@ -62,7 +62,7 @@ export default function Friends() {
   const handleSubmitFriend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .get<FriendData>(`http://localhost:4000/user/email/${query}`)
+      .get<FriendData>(`http://localhost:3000/user/email/${query}`)
       .then((friendRes) => {
         setFriendAdd(friendRes.data);
       })
@@ -74,7 +74,7 @@ export default function Friends() {
 
   const updateFriendList = () => {
     axios
-      .patch(`http://localhost:4000/user/add/${friendAdd?._id}/${user?._id}`)
+      .patch(`http://localhost:3000/user/add/${friendAdd?._id}/${user?._id}`)
       .then((updatedUser) => {
         setUser(updatedUser.data);
       })
@@ -90,7 +90,7 @@ export default function Friends() {
     Promise.all(
       user.friendsList.map((friendId) =>
         axios.get<FriendData>(
-          `http://localhost:4000/user/userLookUp/${friendId}`
+          `http://localhost:3000/user/userLookUp/${friendId}`
         )
       )
     )

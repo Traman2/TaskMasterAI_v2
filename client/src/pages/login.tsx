@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data: FieldValues) => {
     await axios
-      .post("http://localhost:4000/auth", data)
+      .post("http://localhost:3000/auth", data)
       .then((response) => {
         const token = response.data;
         if (token) {

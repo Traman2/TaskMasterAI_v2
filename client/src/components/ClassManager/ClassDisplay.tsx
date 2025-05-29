@@ -32,11 +32,11 @@ export default function ClassDisplay() {
   // load class array
   useEffect(() => {
     axios
-      .get<UserData>("http://localhost:4000/user/me",
+      .get<UserData>("http://localhost:3000/user/me",
         { headers: { "x-auth-token": token } })
       .then(({ data: user }) => {
         return axios.get<ClassData[]>(
-          `http://localhost:4000/class/user/${user._id}`
+          `http://localhost:3000/class/user/${user._id}`
         );
       })
       .then(({ data: cls }) => {

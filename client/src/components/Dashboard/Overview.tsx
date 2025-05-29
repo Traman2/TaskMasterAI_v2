@@ -49,12 +49,12 @@ export default function Overview() {
   useEffect(() => {
     const fetchUserData = () => {
       axios
-        .get<UserData>("http://localhost:4000/user/me",
+        .get<UserData>("http://localhost:3000/user/me",
           { headers: { "x-auth-token": token } })
         .then((userRes) => {
           console.log("success, change to not use hardcoded email");
           return axios.get<ClassData[]>(
-            `http://localhost:4000/class/user/${userRes.data._id}`
+            `http://localhost:3000/class/user/${userRes.data._id}`
           );
         })
         .then((classRes) => {
@@ -73,7 +73,7 @@ export default function Overview() {
     const fetchTaskData = () => {
       const requests = classes.map((cls) =>
         axios
-          .get<TaskData[]>(`http://localhost:4000/task/classid/${cls._id}`)
+          .get<TaskData[]>(`http://localhost:3000/task/classid/${cls._id}`)
           .then((res) => res.data)
       );
 
@@ -84,7 +84,7 @@ export default function Overview() {
           console.log("fetched & set all tasks for graphs");
         })
         .catch((err) => {
-          console.error("Error connecting to server 4000", err);
+          console.error("Error connecting to server 3000", err);
         });
     };
 
