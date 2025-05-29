@@ -32,12 +32,14 @@ interface ClassData {
 export default function Tasks() {
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [classes, setClasses] = useState<ClassData[]>([]);
+  const token = localStorage.getItem("token");
 
   //Pull class details from user details
   useEffect(() => {
     const fetchUserData = () => {
       axios
-        .get<UserData>("http://localhost:4000/user/email/tejassraman@gmail.com")
+        .get<UserData>("http://localhost:4000/user/me",
+          { headers: { "x-auth-token": token } })
         .then((userRes) => {
           console.log("success, change to not use hardcoded email");
           return axios.get<ClassData[]>(

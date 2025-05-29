@@ -8,13 +8,13 @@ import Settings from "./pages/Settings";
 import StudyTools from "./pages/StudyTools";
 import Chatbot from "./pages/Chatbot";
 import Leaderboard from "./pages/Leaderbaord";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="" element={<LoginPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="calendar" element={<Calendar/>} />
@@ -24,6 +24,7 @@ function App() {
           <Route path="chatbot" element={<Chatbot/>} />
           <Route path="settings" element={<Settings/>} />
           <Route path="leaderboard" element={<Leaderboard/>}/>
+          <Route path="" element={<LandingPage/>}/>
         </Routes>
       </Router>
     </>

@@ -106,6 +106,26 @@ const deleteUser = async (req, res) => {
     }
 };
 
+const addFriend = async (req, res) => {
+    try {
+        const curUser = await User.findById({_id: req.params.userid});
+        if (!curUser) {
+            return res.status(404).json({ message: "Critical Error 404, User not found" });
+        }
+
+        const friend = await User.findById({_id: req.params.friendid});
+        if (!friend) {
+            return res.status(404).json({ message: "Critical Error 404, Friend not found" });
+        }
+
+        const updatedProfile = await User.findOneAndUpdate({_id: req.params.userid},{ $addToSet: { friendsList: req.params.friendid } },{ new: true });
+        res.status(200).json(updatedProfile);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 export {
     getUserbyEmail,
@@ -113,5 +133,6 @@ export {
     deleteUser,
     createUser,
     getUserByME,
-    getUserbyId
+    getUserbyId,
+    addFriend
 }

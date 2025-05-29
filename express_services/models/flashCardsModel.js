@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 
-const classSchema = new mongoose.Schema({
-    
-    class: { type: mongoose.Schema.Types.ObjectId, ref: 'Tasks', required: false },
+const flashCardModel = new mongoose.Schema({
+    class: { type: mongoose.Schema.Types.ObjectId, ref: 'Tasks', required: true },
     topic: String,
     question: String,
     answer: String,
 });
 
-export default mongoose.model('FlashCards', classSchema);
+export default mongoose.model('FlashCards', flashCardModel);

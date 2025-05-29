@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import Class from "../models/classModel.js";
-import FlashCard from "../models/flashCardsModel.js"
+import Class from "../../models/classModel.js";
+import FlashCard from "../../models/flashCardsModel.js"
 
 dotenv.config();
 

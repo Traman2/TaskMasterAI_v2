@@ -1,8 +1,8 @@
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import Overview from "@/components/Overview";
-import Tasks from "@/components/Tasks";
-import Friends from "@/components/Friends";
+import Overview from "@/components/Dashboard/Overview";
+import Tasks from "@/components/Dashboard/Tasks";
+import Friends from "@/components/Dashboard/Friends";
 import { useState } from "react";
 
 const tabs = [{ label: "Overview" }, { label: "Tasks" }, { label: "Friends" }]; //Part of mininavbar

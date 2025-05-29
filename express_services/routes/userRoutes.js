@@ -6,7 +6,8 @@ import {
     deleteUser,
     createUser,
     getUserByME,
-    getUserbyId
+    getUserbyId,
+    addFriend
 } from "../controllers/userController.js";
 
 import multer from "multer";
@@ -26,11 +27,12 @@ const upload = multer({ storage: storage });
 
 const router = Router();
 router.get("/me", auth, getUserByME); //Get userid by deciphered local storage web token
-router.get("/userLookUp/:id", getUserbyId); //Get friends by id, can be used to lookup as any user as well
+router.get("/userLookUp/:userid", getUserbyId); //Get friends by id, can be used to lookup as any user as well
 router.get("/email/:email", getUserbyEmail); //Get user by email
 router.post("/", createUser); //POST user, for signup only
 router.patch("/update/:userid", updateProfile); //UPDATE user details
 router.delete("/delete/:userid", deleteUser); //DELETE user by id
+router.patch("/add/:friendid/:userid", addFriend); //PATCH friendlist with new friend
 
 router.post( //POST Syllabus pdf and generate class details
   "/aisyllabus/:userId/api/upload",

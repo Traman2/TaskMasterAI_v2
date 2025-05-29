@@ -41,18 +41,18 @@ interface ClassData {
 }
 
 export default function Overview() {
-  const [userData, setUserData] = useState<UserData | null>(null);
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [classes, setClasses] = useState<ClassData[]>([]);
+  const token = localStorage.getItem("token");
 
   //Pull class details from user details
   useEffect(() => {
     const fetchUserData = () => {
       axios
-        .get<UserData>("http://localhost:4000/user/email/tejassraman@gmail.com")
+        .get<UserData>("http://localhost:4000/user/me",
+          { headers: { "x-auth-token": token } })
         .then((userRes) => {
           console.log("success, change to not use hardcoded email");
-          setUserData(userRes.data);
           return axios.get<ClassData[]>(
             `http://localhost:4000/class/user/${userRes.data._id}`
           );
@@ -210,6 +210,16 @@ export default function Overview() {
                   ? data.name
                   : `${data.name.slice(0, 24)}...`;
 
+              const finalTiming = 
+                data.timing.length <= 24
+                  ? data.timing
+                  : `${data.timing.slice(0, 24)}...` 
+              
+              const finalLocation = 
+                data.location.length <= 24
+                  ? data.location
+                  : `${data.location.slice(0, 24)}...` 
+
               return (
                 <div
                   key={data._id}
@@ -221,11 +231,11 @@ export default function Overview() {
                   </p>
                   <p className="text-blue-200">
                     <span className="font-bold">Timing:</span>{" "}
-                    {data && data.timing}
+                    <span className="truncate">{finalTiming}</span>
                   </p>
                   <p className="text-blue-200">
                     <span className="font-bold">Location:</span>{" "}
-                    {data && data.location}
+                    <span className="truncate">{finalLocation}</span>
                   </p>
                 </div>
               );

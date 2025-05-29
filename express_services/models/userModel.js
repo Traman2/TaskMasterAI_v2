@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     pfp: String,
 
+    //For Gameify
     streak: Number,
     lastTaskDate: Date,
     points: Number,
