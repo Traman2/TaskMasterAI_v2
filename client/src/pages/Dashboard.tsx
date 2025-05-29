@@ -23,9 +23,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-[#040726] flex py-3 pl-3 overflow-hidden">
+    <div className="w-full h-screen bg-[#040726] flex py-3 pl-3 overflow-hidden">
       <Sidebar />
-      <main className="flex-1 ml-3 mr-3 bg-[#0B103E] rounded-2xl p-6 flex flex-col">
+      <main className="flex-1 ml-3 mr-3 bg-[#0B103E] rounded-2xl p-6 flex flex-col min-h-0">
         <Header />
         {/* part of mininavbar */}
         <nav
@@ -54,8 +54,9 @@ export default function Dashboard() {
             );
           })}
         </nav>
-        {/* put mininavbar as a component later */}
-        {renderContent()}
+        <div className="flex-1 min-h-0 overflow-hidden">
+          {renderContent()}
+        </div>
       </main>
     </div>
   );

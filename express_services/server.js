@@ -23,29 +23,96 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("MongoDB Connection failed", err));
 
-//Messages model from mongodb
-import messags from "./models/messages.js"
-
-//Socket.io RTT code
+// RTT Socket.io code
+import messageModel from "./models/messages.js"
 const http = createServer(app);
 const io = new Server(http, {
-  cors: { orgin: "*" },
+  cors: { origin: "*" },
 });
 
-const messages = [];
+async function storeMessage(userId, friendId, text) {
+  try {
+    if (!userId || !friendId || !text) {
+      throw new Error("Missing required parameters: userId, friendId, or text");
+    }
+
+    let chat = await messageModel.findOne({
+      participants: { $all: [userId, friendId] }
+    });
+
+    if (chat) {
+      chat = await messageModel.findOneAndUpdate(
+        { _id: chat._id },
+        { $push: { messages: { sender: userId, text } } },
+        { new: true }
+      );
+    } else {
+      chat = new messageModel({
+        participants: [userId, friendId],
+        messages: [{ sender: userId, text }]
+      });
+      await chat.save();
+    }
+
+    return chat;
+  } catch (error) {
+    console.error("Error in storeMessage:", error);
+    throw error;
+  }
+}
+
+
+async function getChatHistory(userId, friendId) {
+  let chat = await messageModel.findOne({
+    participants: { $all: [userId, friendId] }
+  })
+
+  if (!chat) {
+    const newChat = new messageModel({
+      participants: [userId, friendId],
+      messages: []
+    });
+    await newChat.save();
+    chat = newChat.toObject();
+  }
+
+  return (chat.messages || [])
+    .slice()
+    .sort((a, b) => a.createdAt - b.createdAt);
+}
 
 io.on("connection", (socket) => {
   console.log(`user connected: ${socket.id}`);
 
-  socket.emit("history", messages);
+  socket.on("history", async ({ userId, friendId }) => {
+    try {
+      if (!userId || !friendId) {
+        console.error("Missing userId or friendId in history request");
+        socket.emit("history", []);
+        return;
+      }
 
-  socket.on("message", ({ name, message }) => {
-    console.log(`[${name}] ${message}`);
+      const history = await getChatHistory(userId, friendId);
+      socket.emit("history", history);
+    } catch (err) {
+      console.error("Error fetching history:", err);
+      socket.emit("history", []);
+    }
+  });
 
-    const entry = { id: socket.id, name, message, ts: Date.now() };
-    messages.push(entry);
+  socket.on("message", async ({ userId, friendId, text }) => {
+    try {
+      if (!userId || !friendId || !text) {
+        console.error("Missing required fields in message:", { userId, friendId, text });
+        return;
+      }
 
-    io.emit("message", entry);
+      const chat = await storeMessage(userId, friendId, text);
+      const lastMsg = chat.messages[chat.messages.length - 1];
+      io.emit("message", lastMsg);
+    } catch (err) {
+      console.error("Error storing message:", err);
+    }
   });
 
   socket.on("disconnect", () => {

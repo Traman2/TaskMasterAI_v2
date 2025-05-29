@@ -119,6 +119,7 @@ const addFriend = async (req, res) => {
         }
 
         const updatedProfile = await User.findOneAndUpdate({_id: req.params.userid},{ $addToSet: { friendsList: req.params.friendid } },{ new: true });
+        const friendProfile = await User.findOneAndUpdate({_id: req.params.friendid},{ $addToSet: { friendsList: req.params.userid } },{ new: true });
         res.status(200).json(updatedProfile);
 
     } catch (error) {

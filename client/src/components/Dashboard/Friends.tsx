@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Search } from "lucide-react";
 import { useEffect, useState, type ChangeEvent } from "react";
+import ChatComponent from "./FriendChat/ChatComponent";
 
 // Interfaces
 interface FriendData {
@@ -18,14 +19,6 @@ interface UserData {
   lastName: string;
   email: string;
   friendsList: string[];
-}
-
-interface FriendData {
-  _id: string;
-  userName: string;
-  firstName: string;
-  lastName: string;
-  email: string;
 }
 
 const tabs = [{ label: "Chat" }, { label: "Add Friend" }]; //Part of mininavbar
@@ -48,11 +41,11 @@ export default function Friends() {
     }
   }
 
-  //Query button
   useEffect(() => {
     axios
-      .get<UserData>("http://localhost:4000/user/me",
-          { headers: { "x-auth-token": token } })
+      .get<UserData>("http://localhost:4000/user/me", {
+        headers: { "x-auth-token": token },
+      })
       .then((userRes) => {
         setUser(userRes.data);
       })
@@ -66,7 +59,7 @@ export default function Friends() {
     setActiveTab("Add Friend");
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitFriend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
       .get<FriendData>(`http://localhost:4000/user/email/${query}`)
@@ -110,10 +103,10 @@ export default function Friends() {
   }, [user]);
 
   return (
-    <div className="grid grid-cols-12 gap-3 flex-1">
-      <div className="col-span-3 row-span-1 rounded-2xl bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)] p-3">
+    <div className="grid grid-cols-12 gap-3 h-full min-h-0">
+      <div className="col-span-3 rounded-2xl bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)] p-3 flex flex-col min-h-0">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmitFriend}
           className="flex items-center bg-[#0006B1] border border-blue-600 rounded-full px-4 py-2"
         >
           <input
@@ -131,7 +124,7 @@ export default function Friends() {
           </button>
         </form>
         {/* Display friends */}
-        <div className="bg-[#31258B] mt-4 rounded-2xl p-2 border border-blue-800">
+        <div className="bg-[#31258B] mt-4 rounded-2xl p-2 border border-blue-800 flex-1 overflow-y-auto">
           {friendsData.map((c) => (
             <div
               onClick={() => setActiveFriend(c)}
@@ -147,7 +140,7 @@ export default function Friends() {
       </div>
 
       <div
-        className={`col-span-9 row-span-1 rounded-2xl bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)] p-3 flex flex-col`}
+        className={`col-span-9 rounded-2xl bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)] p-3 flex flex-col min-h-0`}
       >
         <nav
           className="
@@ -175,7 +168,7 @@ export default function Friends() {
             );
           })}
         </nav>
-        <div className="flex-1 min-h-0">{renderContent()}</div>
+        <div className="flex-1 min-h-0 overflow-hidden">{renderContent()}</div>
       </div>
     </div>
   );
@@ -223,23 +216,28 @@ export default function Friends() {
   // Render 2: Chat
   function Chat() {
     return (
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col min-h-0">
         <div className="flex-1 grid grid-cols-12 gap-3 min-h-0">
           {/* Chat Panel */}
-          <div className="col-span-8 bg-[#3389B2]/44 p-4 rounded-2xl overflow-auto">
+          <div className="col-span-8 bg-[#3389B2]/44 p-4 rounded-2xl flex flex-col min-h-0">
             {activeFriend ? (
               <>
-                <p className="text-white">Chat with {activeFriend.userName}</p>
+                <p className="text-white mb-2">Chat with {activeFriend.userName}</p>
+                {user && (
+                  <ChatComponent activeFriend={activeFriend} userid={user._id} />
+                )}
               </>
             ) : (
-              <>
-                <p className="text-white">Click a Friend to chat</p>
-              </>
+              <div className="flex-1 flex items-center justify-center">
+                <p className="text-white text-2xl border-2 border-dashed p-3 rounded-2xl font-bold">
+                  Click a Friend to chat
+                </p>
+              </div>
             )}
-            
           </div>
+          
           {/* Friend Details Panel */}
-          <div className="col-span-4 bg-[#3389B2]/44 p-4 rounded-2xl overflow-auto">
+          <div className="col-span-4 bg-[#3389B2]/44 p-4 rounded-2xl min-h-0">
             {activeFriend ? (
               <>
                 <p className="text-white">Contact Details:</p>
