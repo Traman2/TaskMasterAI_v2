@@ -49,8 +49,9 @@ export default function Overview() {
   useEffect(() => {
     const fetchUserData = () => {
       axios
-        .get<UserData>("http://localhost:3000/user/me",
-          { headers: { "x-auth-token": token } })
+        .get<UserData>("http://localhost:3000/user/me", {
+          headers: { "x-auth-token": token },
+        })
         .then((userRes) => {
           console.log("success, change to not use hardcoded email");
           return axios.get<ClassData[]>(
@@ -124,171 +125,193 @@ export default function Overview() {
 
   return (
     <>
-      <div className="grid grid-cols-3 grid-rows-6 gap-3 flex-1">
-        {/* small card status ---------------------------------------------------------------------------------------------------*/}
-        <div
-          className="
+      {classes.length > 0 ? (
+        <>
+          <div className="grid grid-cols-3 grid-rows-6 gap-3 flex-1">
+            {/* small card status ---------------------------------------------------------------------------------------------------*/}
+            <div
+              className="
             col-span-1 row-span-6 rounded-2xl
             bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)]
             p-4
             flex flex-col
           "
-        >
-          <h1 className="text-white font-bold mb-3">Status</h1>
-          <div
-            className="
+            >
+              <h1 className="text-white font-bold mb-3">Status</h1>
+              <div
+                className="
               flex flex-wrap items-center sm:justify-center
               bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)]
               border border-blue-700 rounded-2xl
               px-4 py-2
             "
-          >
-            {/* Chart goes here; full width on small, auto width on sm+ */}
-            <div className="flex-shrink-0 w-auto">
-              <Doughnut
-                data={data}
-                options={options}
-                width={180}
-                height={170}
-              />
-            </div>
+              >
+                {/* Chart goes here; full width on small, auto width on sm+ */}
+                <div className="flex-shrink-0 w-auto">
+                  <Doughnut
+                    data={data}
+                    options={options}
+                    width={180}
+                    height={170}
+                  />
+                </div>
 
-            {/* Text card; full width on small, flex-1 on sm+ */}
-            <div className="w-full ml-4 flex-1">
-              <p className="text-blue-100 text-base leading-snug border-blue-700 border-2 p-2 rounded-2xl bg-[rgba(37,33,96,0.42)]">
-                <span className="text-blue-200 font-bold">Pending: </span>{" "}
-                {pendingCount}
-                <br />
-                <span className="text-blue-200 font-bold">
-                  Completed:{" "}
-                </span>{" "}
-                {completedCount}
-                <br />
-                <span className="text-blue-200 font-bold">Overdue: </span>{" "}
-                {overdueCount}
-              </p>
-            </div>
-          </div>
+                {/* Text card; full width on small, flex-1 on sm+ */}
+                <div className="w-full ml-4 flex-1">
+                  <p className="text-blue-100 text-base leading-snug border-blue-700 border-2 p-2 rounded-2xl bg-[rgba(37,33,96,0.42)]">
+                    <span className="text-blue-200 font-bold">Pending: </span>{" "}
+                    {pendingCount}
+                    <br />
+                    <span className="text-blue-200 font-bold">
+                      Completed:{" "}
+                    </span>{" "}
+                    {completedCount}
+                    <br />
+                    <span className="text-blue-200 font-bold">
+                      Overdue:{" "}
+                    </span>{" "}
+                    {overdueCount}
+                  </p>
+                </div>
+              </div>
 
-          <h1 className="text-white font-bold mt-5">Alerts</h1>
-          <div className="bg-[#31258B] mt-2 rounded-2xl p-2 border border-blue-800">            
-            <div
-              className=" mt-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)]
+              <h1 className="text-white font-bold mt-5">Alerts</h1>
+              <div className="bg-[#31258B] mt-2 rounded-2xl p-2 border border-blue-800">
+                <div
+                  className=" mt-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)]
               border border-blue-700 rounded-2xl p-3"
-            >
-              <p className="text-blue-100">
-                {" "}
-                Computer Science 2 currently has 5 assignments
-              </p>
-            </div>
+                >
+                  <p className="text-blue-100">
+                    {" "}
+                    Computer Science 2 currently has 5 assignments
+                  </p>
+                </div>
 
-            <div
-              className="mt-5 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)]
+                <div
+                  className="mt-5 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)]
               border border-blue-700 rounded-2xl p-3"
-            >
-              <p className="text-blue-100">
-                {" "}
-                Engineering and Technical Communicaition currently has 5
-                assignments
-              </p>
+                >
+                  <p className="text-blue-100">
+                    {" "}
+                    Engineering and Technical Communicaition currently has 5
+                    assignments
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Large card top row class details ------------------------------------------------------------------------------------------*/}
-        <div
-          className="
+            {/* Large card top row class details ------------------------------------------------------------------------------------------*/}
+            <div
+              className="
               col-span-2 row-span-2 rounded-2xl py-5 px-5
               bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)]
             "
-        >
-          <h1 className="text-white font-bold">Upcoming Classes</h1>
-          <div className="flex flex-wrap gap-3">
-            {classes.slice(0, 2).map((data) => {
-              const finalName =
-                data.name.length <= 24
-                  ? data.name
-                  : `${data.name.slice(0, 24)}...`;
+            >
+              <h1 className="text-white font-bold">Upcoming Classes</h1>
+              <div className="flex flex-wrap gap-3">
+                {classes.slice(0, 2).map((data) => {
+                  const finalName =
+                    data.name.length <= 24
+                      ? data.name
+                      : `${data.name.slice(0, 24)}...`;
 
-              const finalTiming = 
-                data.timing.length <= 24
-                  ? data.timing
-                  : `${data.timing.slice(0, 24)}...` 
-              
-              const finalLocation = 
-                data.location.length <= 24
-                  ? data.location
-                  : `${data.location.slice(0, 24)}...` 
+                  const finalTiming =
+                    data.timing.length <= 24
+                      ? data.timing
+                      : `${data.timing.slice(0, 24)}...`;
 
-              return (
-                <div
-                  key={data._id}
-                  className="border-blue-700 border-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] mt-3 px-4 py-2 rounded-md"
-                >
-                  <p className="text-blue-200">
-                    <span className="font-bold">Class:</span>{" "}
-                    <span className="truncate">{finalName}</span>
-                  </p>
-                  <p className="text-blue-200">
-                    <span className="font-bold">Timing:</span>{" "}
-                    <span className="truncate">{finalTiming}</span>
-                  </p>
-                  <p className="text-blue-200">
-                    <span className="font-bold">Location:</span>{" "}
-                    <span className="truncate">{finalLocation}</span>
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                  const finalLocation =
+                    data.location.length <= 24
+                      ? data.location
+                      : `${data.location.slice(0, 24)}...`;
 
-        {/* Large card second row activity -----------------------------------------------------------------------------*/}
-        <div
-          className="
+                  return (
+                    <div
+                      key={data._id}
+                      className="border-blue-700 border-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] mt-3 px-4 py-2 rounded-md"
+                    >
+                      <p className="text-blue-200">
+                        <span className="font-bold">Class:</span>{" "}
+                        <span className="truncate">{finalName}</span>
+                      </p>
+                      <p className="text-blue-200">
+                        <span className="font-bold">Timing:</span>{" "}
+                        <span className="truncate">{finalTiming}</span>
+                      </p>
+                      <p className="text-blue-200">
+                        <span className="font-bold">Location:</span>{" "}
+                        <span className="truncate">{finalLocation}</span>
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Large card second row activity -----------------------------------------------------------------------------*/}
+            <div
+              className="
               col-span-2 row-span-4 rounded-2xl px-5 py-5
               bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)]
             "
-        >
-          <h1 className="text-white font-bold">Activity</h1>
-          <div className="flex flex-wrap gap-x-2">
-            {tasks.slice(0, 6).map((data) => {
-              const date = new Date(data.deadline);
-              const formattedDate = date.toLocaleString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-                hour: "numeric",
-                minute: "2-digit",
-                hour12: true,
-              });
+            >
+              <h1 className="text-white font-bold">Activity</h1>
+              <div className="flex flex-wrap gap-x-2">
+                {tasks.slice(0, 6).map((data) => {
+                  const date = new Date(data.deadline);
+                  const formattedDate = date.toLocaleString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true,
+                  });
 
-              const finalName =
-                data.title.length <= 24
-                  ? data.title
-                  : `${data.title.slice(0, 24)}...`;
+                  const finalName =
+                    data.title.length <= 24
+                      ? data.title
+                      : `${data.title.slice(0, 24)}...`;
 
-              return (
-                <div
-                  key={data._id}
-                  className="border-blue-700 border-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] mt-3 px-4 py-2 rounded-md"
-                >
-                  <p className="text-blue-200">
-                    <span className="font-bold">Title:</span> {finalName}
-                  </p>
-                  <p className="text-blue-200">
-                    <span className="font-bold">Due Date:</span> {formattedDate}
-                  </p>
-                  <p className="text-blue-200">
-                    <span className="font-bold">Points:</span>{" "}
-                    {data && data.points}
-                  </p>
-                </div>
-              );
-            })}
+                  return (
+                    <div
+                      key={data._id}
+                      className="border-blue-700 border-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] mt-3 px-4 py-2 rounded-md"
+                    >
+                      <p className="text-blue-200">
+                        <span className="font-bold">Title:</span> {finalName}
+                      </p>
+                      <p className="text-blue-200">
+                        <span className="font-bold">Due Date:</span>{" "}
+                        {formattedDate}
+                      </p>
+                      <p className="text-blue-200">
+                        <span className="font-bold">Points:</span>{" "}
+                        {data && data.points}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <>
+          <div
+            className="
+            flex justify-center items-center flex-1
+              col-span-1 row-span-9 rounded-2xl
+              bg-[linear-gradient(90deg,_#00008B_0%,_#000080_84%)]
+          "
+          >
+            {/* Implement task cards later */}
+            <p className="text-white text-1xl font-bold border-2 border-dashed p-3 rounded-2xl">
+              Add Syllabus in Class Manager to get started
+            </p>
+          </div>
+        </>
+      )}
     </>
   );
 }

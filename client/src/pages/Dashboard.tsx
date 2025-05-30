@@ -3,22 +3,65 @@ import Header from "@/components/Header";
 import Overview from "@/components/Dashboard/Overview";
 import Tasks from "@/components/Dashboard/Tasks";
 import Friends from "@/components/Dashboard/Friends";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const tabs = [{ label: "Overview" }, { label: "Tasks" }, { label: "Friends" }]; //Part of mininavbar
 
+// Interfaces
+interface UserData {
+  _id: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+interface ClassData {
+  _id: string;
+  name: string;
+  timing: string;
+  location: string;
+}
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("Overview");
+  const [classes, setClasses] = useState<ClassData[]>([]);
+  const token = localStorage.getItem("token");
+
+  //Pull class details from user details
+  useEffect(() => {
+    const fetchUserData = () => {
+      axios
+        .get<UserData>("http://localhost:3000/user/me", {
+          headers: { "x-auth-token": token },
+        })
+        .then((userRes) => {
+          console.log("success, change to not use hardcoded email");
+          return axios.get<ClassData[]>(
+            `http://localhost:3000/class/user/${userRes.data._id}`
+          );
+        })
+        .then((classRes) => {
+          setClasses(classRes.data);
+          console.log("success, change to not use hardcoded email");
+        })
+        .catch((err) => {
+          console.error("Error with user details", err);
+        });
+    };
+    fetchUserData();
+  }, []);
 
   //Part of mininavbar
   function renderContent() {
     switch (activeTab) {
       case "Tasks":
-        return <Tasks />
+        return <Tasks />;
       case "Friends":
-        return <Friends />
+        return <Friends />;
       default:
-        return <Overview/>
+        return <Overview />;
     }
   }
 
@@ -54,9 +97,13 @@ export default function Dashboard() {
             );
           })}
         </nav>
-        <div className="flex-1 min-h-0 overflow-hidden">
-          {renderContent()}
-        </div>
+        {classes.length > 0 ? (
+          <div className="flex-1 min-h-0 overflow-hidden">
+            {renderContent()}
+          </div>
+        ) : (
+          renderContent()
+        )}
       </main>
     </div>
   );
