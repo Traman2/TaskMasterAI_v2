@@ -61,10 +61,16 @@ export default function Friends() {
 
   const handleSubmitFriend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(query === user?.email) {
+      setFriendAdd(null);
+      return;
+    }
     axios
       .get<FriendData>(`http://localhost:3000/user/email/${query}`)
       .then((friendRes) => {
-        setFriendAdd(friendRes.data);
+        if(friendRes.data._id !== user?._id){
+          setFriendAdd(friendRes.data);
+        }
       })
       .catch((err) => {
         setFriendAdd(null);

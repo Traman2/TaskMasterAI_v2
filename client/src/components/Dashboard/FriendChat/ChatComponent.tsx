@@ -41,7 +41,6 @@ export default function ChatComponent({
     console.log(userid);
   }, []);
 
-  //Chat useStates
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
@@ -52,23 +51,26 @@ export default function ChatComponent({
     formState: { errors },
   } = useForm<MessageForm>({ resolver: zodResolver(messageSchema) });
 
-  // request history on friend change
   useEffect(() => {
-    if (!activeFriend) return;
+    if (!activeFriend || !userid) return;
     socket.emit("history", { userId: userid, friendId: activeFriend._id });
-  }, []);
+  }, [activeFriend, userid]);
 
-  // socket listeners
   useEffect(() => {
     socket.on("history", (hist: ChatMessage[]) => setMessages(hist));
-    socket.on("message", (msg: ChatMessage) =>
-      setMessages((prev) => [...prev, msg])
-    );
+    socket.on("message", (data: { message: ChatMessage, senderId: string, receiverId: string }) => {
+      const { message, senderId, receiverId } = data;
+      if ((senderId === userid && receiverId === activeFriend._id) || 
+          (senderId === activeFriend._id && receiverId === userid)) {
+        setMessages((prev) => [...prev, message]);
+      }
+    });
+
     return () => {
       socket.off("history");
       socket.off("message");
     };
-  }, []);
+  }, [userid, activeFriend]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -94,11 +96,17 @@ export default function ChatComponent({
               return (
                 <div
                   key={idx}
-                  className={`max-w-xs break-words p-2 rounded-lg text-white ${
+                  className={`break-words px-2 py-2 rounded-lg text-white ${
                     isMine
                       ? "bg-blue-500 self-end ml-auto"
                       : "bg-gray-700 self-start mr-auto"
                   }`}
+                  style={{ 
+                    maxWidth: "60%",
+                    width: "fit-content",
+                    wordWrap: "break-word",
+                    overflowWrap: "break-word",
+                  }}
                 >
                   {m.text}
                 </div>

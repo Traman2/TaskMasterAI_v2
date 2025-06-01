@@ -104,7 +104,12 @@ io.on("connection", (socket) => {
 
       const chat = await storeMessage(userId, friendId, text);
       const lastMsg = chat.messages[chat.messages.length - 1];
-      io.emit("message", lastMsg);
+      
+      io.emit("message", {
+        message: lastMsg,
+        senderId: userId,
+        receiverId: friendId
+      });
     } catch (err) {
       console.error("Error storing message:", err);
     }
