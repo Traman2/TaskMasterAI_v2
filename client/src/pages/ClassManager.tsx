@@ -1,6 +1,5 @@
 import ClassDisplay from "@/components/ClassManager/ClassDisplay";
 import DropBoxClass from "@/components/ClassManager/DropBox";
-import Sidebar from "@/components/Sidebar";
 import { useState } from "react";
 
 const tabs = [{ label: "Class Management" }, { label: "Drop Syllabus" }]; //Part of mininavbar

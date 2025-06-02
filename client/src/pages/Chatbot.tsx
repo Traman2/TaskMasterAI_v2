@@ -1,7 +1,4 @@
-import Sidebar from "@/components/Sidebar";
-
 export default function Chatbot() {
-
   return (
     <>
         <main className="flex-1 ml-3 mr-3 bg-[#0B103E] rounded-2xl p-6 flex flex-col">

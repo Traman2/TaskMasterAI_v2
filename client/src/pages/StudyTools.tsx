@@ -1,6 +1,5 @@
 import FlashCards from "@/components/StudyTools/FlashCards";
 import Quizzes from "@/components/StudyTools/Quizzes";
-import Sidebar from "@/components/Sidebar";
 import { useState } from "react";
 
 const tabs = [{ label: "Flashcards" }, { label: "Quizzes" }]; //Part of mininavbar

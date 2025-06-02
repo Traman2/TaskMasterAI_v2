@@ -1,4 +1,3 @@
-import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import Overview from "@/components/Dashboard/Overview";
 import Tasks from "@/components/Dashboard/Tasks";
