@@ -23,7 +23,7 @@ const typingAnimation = `
   }
 `;
 
-export default function TaskMasterNavbar() {
+export default function LandingPage() {
   const [solid, setSolid] = useState(false);
   const navigate = useNavigate();
 
