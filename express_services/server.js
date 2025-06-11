@@ -33,7 +33,7 @@ const io = new Server(http, {
 async function storeMessage(userId, friendId, text) {
   try {
     if (!userId || !friendId || !text) {
-      throw new Error("Missing required parameters: userId, friendId, or text");
+      throw new Error("Missing required parameters userId, friendId, or text");
     }
 
     let chat = await messageModel.findOne({
@@ -82,7 +82,7 @@ io.on("connection", (socket) => {
   socket.on("history", async ({ userId, friendId }) => {
     try {
       if (!userId || !friendId) {
-        console.error("Missing userId or friendId in history request");
+        console.error("Missing userId or friendId in history req");
         socket.emit("history", []);
         return;
       }

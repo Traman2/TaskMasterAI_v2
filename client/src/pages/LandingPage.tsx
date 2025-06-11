@@ -38,14 +38,7 @@ export default function LandingPage() {
   return (
     <div className="relative h-screen flex flex-col">
       <style>{typingAnimation}</style>
-      <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <div className="absolute top-20 left-1/4 w-4 h-4 bg-orange-400 rotate-45"></div>
-        <div className="absolute top-40 right-1/4 w-3 h-3 bg-green-400 rotate-45"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-blue-400 rotate-45"></div>
-        <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-purple-500 rotate-45 opacity-60"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-3 h-3 bg-yellow-400 rotate-45"></div>
-        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-pink-400 rotate-45"></div>
-      </div>
+      <div className="fixed inset-0 bg-gradient-to-br from-blue-900 to-blue-800" />
       <div
         className="relative z-10 flex-1 flex flex-col overflow-auto scrollbar-cool"
         onScroll={(e) => setSolid(e.currentTarget.scrollTop > 90)}

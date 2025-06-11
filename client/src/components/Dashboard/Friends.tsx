@@ -135,7 +135,7 @@ export default function Friends() {
             <div
               onClick={() => setActiveFriend(c)}
               key={c._id}
-              className="mt-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] border border-blue-700 rounded-2xl p-3"
+              className={`cursor-pointer mt-2 bg-[linear-gradient(90deg,_#3C3CB5_0%,_#4444C8_100%)] ${(activeFriend?._id === c._id) ? "border-green-700 border-3"  : "border-blue-600 border"} rounded-2xl p-3`}
             >
               <p className="text-blue-100">
                 {c.firstName} {c.lastName}

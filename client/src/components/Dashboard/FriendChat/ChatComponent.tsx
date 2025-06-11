@@ -73,7 +73,7 @@ export default function ChatComponent({
   }, [userid, activeFriend]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    bottomRef.current?.scrollIntoView({behavior : "auto"});
   }, [messages]);
 
   const onSubmit = (data: MessageForm) => {
