@@ -6,9 +6,19 @@ import Carosuel from "@/components/LandingPage/Carosuel";
 import AdditionalFeatures from "@/components/LandingPage/AdditionalFeatures";
 import CallToAction from "@/components/LandingPage/CallToAction";
 import Footer from "@/components/LandingPage/Footer";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
   const [solid, setSolid] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/login");
+  }
+
+  const signUp = () => {
+    navigate("/login"); //Link to login for now
+  }
 
   return (
     <div
@@ -29,10 +39,10 @@ export default function LandingPage() {
           <span className="text-xl font-semibold text-white font-(family-name:--font-orbitron)">TaskMasterAI</span>
         </div>
         <div className="flex items-center gap-4">
-          <button className="font-bold text-white hover:text-gray-200">
+          <button className="font-bold text-white hover:text-gray-200 cursor-pointer" onClick={handleLogin}>
             Login
           </button>
-          <button className="rounded-full font-bold bg-gradient-to-r from-[#191970] to-[#3030D6] px-6 py-2 text-white hover:opacity-90">
+          <button className="rounded-full font-bold bg-gradient-to-r from-[#191970] to-[#3030D6] px-6 py-2 text-white hover:opacity-90 cursor-pointer" onClick={signUp}>
             Sign Up
           </button>
         </div>

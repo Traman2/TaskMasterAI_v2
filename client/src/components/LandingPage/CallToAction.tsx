@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export default function CallToAction() {
+  const navigate = useNavigate();
+
+  const signUp = () => {
+    navigate("/login"); //Link to login for now
+  }
+  
   return (
     <>
       <div className="relative mt-80">
@@ -11,7 +19,7 @@ export default function CallToAction() {
               <p className="mt-4 text-center text-[16px] text-gray-300">
                 Join the one of many students already using TaskMasterAI
               </p>
-              <button className="font-(family-name:--font-orbitron) mt-8 rounded-full font-bold bg-gradient-to-r from-[#071881] to-[#09103C] px-8 py-3 text-white hover:opacity-90">
+              <button className="font-(family-name:--font-orbitron) mt-8 rounded-full font-bold bg-gradient-to-r from-[#071881] to-[#09103C] px-8 py-3 text-white hover:opacity-90 cursor-pointer" onClick={signUp}>
                 Get Started
               </button>
             </div>
